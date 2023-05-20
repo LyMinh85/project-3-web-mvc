@@ -3,6 +3,8 @@ package com.example.project3webmvc.entity;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Data
@@ -20,7 +22,7 @@ public class Vegetable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vegetable", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 
-    @Column
+    @Column(name = "vegetablename")
     private String vegetableName;
 
     @Column
@@ -37,18 +39,15 @@ public class Vegetable {
 
     public Vegetable() {}
 
-    public Vegetable(String vegetableName, String unit, int amount, String image, float price) {
+    public Vegetable(int vegetableID, Category category, List<OrderDetail> orderDetails, String vegetableName, String unit, int amount, String image, float price) {
+        this.vegetableID = vegetableID;
+        this.category = category;
+        this.orderDetails = orderDetails;
         this.vegetableName = vegetableName;
         this.unit = unit;
         this.amount = amount;
         this.image = image;
         this.price = price;
-    }
-
-    public Object[] toObject(){
-        return new Object[]{
-                getVegetableID(),getVegetableName(),getPrice(),getAmount(), getUnit(),getCategory().getName(), getImage()
-        };
     }
 
     @Override
@@ -64,4 +63,8 @@ public class Vegetable {
                 '}';
     }
 
+    public String getPriceFormat() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format((int) price);
+    }
 }

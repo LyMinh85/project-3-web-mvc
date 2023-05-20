@@ -3,12 +3,15 @@ package com.example.project3webmvc.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.text.DecimalFormat;
+
 @Data
 @Entity
 @Table(name = "orderdetail")
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "orderdetailid")
     private int orderDetailID;
 
     @ManyToOne
@@ -32,5 +35,10 @@ public class OrderDetail {
         this.vegetable = vegetable;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public String getPriceFormat() {
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return formatter.format((int) price);
     }
 }

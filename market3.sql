@@ -29,10 +29,10 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
-                          `categoryID` int NOT NULL AUTO_INCREMENT,
-                          `name` varchar(30) NOT NULL,
-                          `description` varchar(50) DEFAULT NULL,
-                          PRIMARY KEY (`categoryID`)
+                            `categoryID` int NOT NULL AUTO_INCREMENT,
+                            `name` varchar(30) NOT NULL,
+                            `description` varchar(50) DEFAULT NULL,
+                            PRIMARY KEY (`categoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,13 +54,13 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customers` (
-                           `customerID` int NOT NULL AUTO_INCREMENT,
-                           `password` varchar(20) NOT NULL,
-                           `fullname` varchar(40) NOT NULL,
-                           `address` varchar(50) DEFAULT NULL,
-                           `city` varchar(20) DEFAULT NULL,
-                           `email` varchar(50) NOT NULL,
-                           PRIMARY KEY (`customerID`)
+                             `customerID` int NOT NULL AUTO_INCREMENT,
+                             `password` varchar(20) NOT NULL,
+                             `fullname` varchar(40) NOT NULL,
+                             `address` varchar(50) DEFAULT NULL,
+                             `city` varchar(20) DEFAULT NULL,
+                             `email` varchar(50) NOT NULL,
+                             PRIMARY KEY (`customerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,13 +71,13 @@ CREATE TABLE `customers` (
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
 INSERT INTO `customers`(`customerID`, `email`, `password`, `fullname`, `address`, `city`) VALUES
-                                                                                            (1, 'user1@gmail.com', 'user1', 'Smith', '30 Broadway', 'London'),
-                                                                                            (2, 'user2@gmail.com', 'user2', 'Jonny', '99 River View', 'Japan'),
-                                                                                            (3, 'user3@gmail.com', 'user3', 'Elizabeth', '23 Buckinghamshire', 'York'),
-                                                                                            (4, 'user4@gmail.com', 'user4', 'Beatrix', '66 Royal Crescent', 'Bath'),
-                                                                                            (5, 'user5@gmail.com', 'user5', 'David', '39 Kingsman', 'USA'),
-                                                                                            (6, 'user6@gmail.com', 'user6', 'Marco', '55 Broadway 1111', 'London'),
-                                                                                            (7, 'user7@gmail.com', 'user7', 'Thanh', '55 An Duong Vuong', 'Vietnam');
+                                                                                              (1, 'user1@gmail.com', 'user1', 'Smith', '30 Broadway', 'London'),
+                                                                                              (2, 'user2@gmail.com', 'user2', 'Jonny', '99 River View', 'Japan'),
+                                                                                              (3, 'user3@gmail.com', 'user3', 'Elizabeth', '23 Buckinghamshire', 'York'),
+                                                                                              (4, 'user4@gmail.com', 'user4', 'Beatrix', '66 Royal Crescent', 'Bath'),
+                                                                                              (5, 'user5@gmail.com', 'user5', 'David', '39 Kingsman', 'USA'),
+                                                                                              (6, 'user6@gmail.com', 'user6', 'Marco', '55 Broadway 1111', 'London'),
+                                                                                              (7, 'user7@gmail.com', 'user7', 'Thanh', '55 An Duong Vuong', 'Vietnam');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `hibernate_sequence`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint DEFAULT NULL
+    `next_val` bigint DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -111,13 +111,13 @@ DROP TABLE IF EXISTS `orderdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orderdetail` (
-                             `orderDetailID` int unsigned primary key NOT NULL AUTO_INCREMENT,
-                             `orderID` int unsigned NOT NULL,
-                             `vegetableID` int NOT NULL,
-                             `quantity` tinyint NOT NULL,
-                             `price` float NOT NULL,
-                             CONSTRAINT `FK_order_orderDetail` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`),
-                             CONSTRAINT `FK_vegetable_orderDetail` FOREIGN KEY (`vegetableID`) REFERENCES `vegetable` (`vegetableID`)
+                               `orderDetailID` int unsigned primary key NOT NULL AUTO_INCREMENT,
+                               `orderID` int unsigned NOT NULL,
+                               `vegetableID` int NOT NULL,
+                               `quantity` tinyint NOT NULL,
+                               `price` float NOT NULL,
+                               CONSTRAINT `FK_order_orderDetail` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`),
+                               CONSTRAINT `FK_vegetable_orderDetail` FOREIGN KEY (`vegetableID`) REFERENCES `vegetable` (`vegetableID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=600 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -139,14 +139,14 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-                        `orderID` int unsigned NOT NULL AUTO_INCREMENT,
-                        `customerID` int NOT NULL,
-                        `date` date NOT NULL,
-                        `total` float NOT NULL,
-                        `note` text NOT NULL,
-                        PRIMARY KEY (`orderID`),
-                        KEY `customerID` (`customerID`),
-                        CONSTRAINT `FK_customer` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`)
+                          `orderID` int unsigned NOT NULL AUTO_INCREMENT,
+                          `customerID` int NOT NULL,
+                          `date` date NOT NULL,
+                          `total` float NOT NULL,
+                          `note` text NOT NULL,
+                          PRIMARY KEY (`orderID`),
+                          KEY `customerID` (`customerID`),
+                          CONSTRAINT `FK_customer` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=407 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,16 +168,16 @@ DROP TABLE IF EXISTS `vegetable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vegetable` (
-                           `vegetableID` int NOT NULL AUTO_INCREMENT,
-                           `categoryID` int NOT NULL,
-                           `vegetableName` varchar(50) DEFAULT NULL,
-                           `unit` varchar(20) NOT NULL,
-                           `amount` int NOT NULL,
-                           `image` varchar(50) NOT NULL,
-                           `price` float NOT NULL,
-                           PRIMARY KEY (`vegetableID`),
-                           KEY `catagoryID` (`categoryID`),
-                           CONSTRAINT `FK_category` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`)
+                             `vegetableID` int NOT NULL AUTO_INCREMENT,
+                             `categoryID` int NOT NULL,
+                             `vegetableName` varchar(50) DEFAULT NULL,
+                             `unit` varchar(20) NOT NULL,
+                             `amount` int NOT NULL,
+                             `image` varchar(50) NOT NULL,
+                             `price` float NOT NULL,
+                             PRIMARY KEY (`vegetableID`),
+                             KEY `catagoryID` (`categoryID`),
+                             CONSTRAINT `FK_category` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
