@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:each="customer : ${customers}">
+        <h3 th:utext="${customer.getEmail()}">...</h3>
+    </div>
+
+</body>
+</html>
