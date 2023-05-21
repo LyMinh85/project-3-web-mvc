@@ -14,16 +14,51 @@
         <div class="col-12 col-md-3 ps-md-5">
             <div class="container mt-5 px-4 px-lg-2">
                 <div class="d-flex flex-column justify-content-center border border-secondary-subtle">
-                    <ul class="list-group list-group-flush">
+                    <div class="list-group list-group-flush">
                         <h3 class="list-group-item">Category</h3>
-                        <a href="#" class="list-group-item list-group-item-action">An item</a>
-                        <a href="#" class="list-group-item list-group-item-action active">A second item</a>
-                        <a href="#" class="list-group-item list-group-item-action">A third item</a>
-                        <a href="#" class="list-group-item list-group-item-action">A fourth item</a>
-                        <a href="#" class="list-group-item list-group-item-action">And a fifth one</a>
-                    </ul>
+                        <div th:each="category : ${categories}">
+                            <a th:href="@{/vegetables(categoryId=${category.getCategoryID()})}"
+                               th:utext="${category.getName()}"
+                               class="list-group-item list-group-item-action">
+                                An item
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+            <form action="/vegetables/search" method="post" class="container mt-5 px-4 px-lg-2">
+                <div class="d-flex flex-column justify-content-center border border-secondary-subtle">
+                    <div class="list-group list-group-flush">
+                        <h3 class="list-group-item">Tìm kiếm nâng cao</h3>
+                        <h5 class="ms-3 fs-5 fw-semibold">Tìm kiếm theo tên</h5>
+                        <div class="d-flex ms-3 mb-2" role="search">
+                            <div class="">
+                                <div class="input-group">
+                                    <input
+                                            class="form-control border"
+                                            type="Search"
+                                            placeholder="Search"
+                                            name="name"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div th:each="category : ${categories}" class="ms-2 form-check">
+                            <input name="categoryId"
+                                   th:value="${category.getCategoryID()}"
+                                   class="form-check-input" type="checkbox">
+                            <label th:utext="${category.getName()}" class="form-check-label">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+
+                    </div>
+                </div>
+            </form>
+
         </div>
         <div class="col-12 col-md-9">
             <div class="px-4 px-lg-5 mt-5 ">
@@ -36,7 +71,7 @@
                             <!-- Product image-->
                             <img
                                     class="card-img-top"
-                                    th:src="@{${vegetable.getImage()}}"
+                                    th:src="@{'/' + ${vegetable.getImage()}}"
                                     src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
                                     alt="..."
                             />
@@ -63,9 +98,12 @@
                                         <div class="quantity mx-3 h-100 fs-4">1</div>
                                         <button class="plus-button mx-1 btn btn-primary"><i class="bi bi-plus-lg" style="font-size: 14px;"></i></button>
                                     </div>
-                                    <button th:attr="data-id=${vegetable.getVegetableID()}"
+                                    <button th:if="${vegetable.getAmount() > 0}" th:attr="data-id=${vegetable.getVegetableID()}"
                                             class="btn btn-outline-dark mt-auto add-to-cart">
                                         Add to cart
+                                    </button>
+                                    <button th:if="${vegetable.getAmount() <= 0}" class="btn btn-outline-dark disabled mt-auto">
+                                        Hết hàng
                                     </button>
                                 </div>
                             </div>
@@ -79,61 +117,6 @@
     </div>
 </section>
 
-
-<!--<div id="sidebar-cart" class="sidebar-cart shadow">-->
-<!--    <div class="d-flex flex-column">-->
-<!--        <div class="col-auto mt-3 d-flex justify-content-between">-->
-<!--            <div class="ps-3">-->
-<!--                <h3>Giỏ hàng</h3>-->
-<!--            </div>-->
-<!--            <div id="close-sidebar-cart-button" class="icon-button text-center me-2">-->
-<!--                <i class="bi bi-x-lg"></i>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <hr />-->
-
-<!--        &lt;!&ndash; Item  &ndash;&gt;-->
-<!--        <div class="col-auto d-flex ">-->
-<!--            <div class="col-auto px-3">-->
-<!--                <img src="https://cdn.shopify.com/s/files/1/0206/9470/products/1222-done_medium.jpg?v=1593492703"-->
-<!--                     style="height: 100px; width: 100px;"-->
-<!--                     class="img-fluid rounded-start" alt="...">-->
-<!--            </div>-->
-<!--            <div class="col-auto">-->
-<!--                <h5 class="card-title">Bắp cải xanh</h5>-->
-<!--                <div class="row g-3 align-items-center">-->
-<!--                    <div class="col-auto">-->
-<!--                        <label class="col-form-label">-->
-<!--                            <span class="fw-semibold">Số lượng</span>-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                        <input type="number"-->
-<!--                               style="max-width: 100px; height: 30px;"-->
-<!--                               class="form-control"-->
-<!--                               value="1"-->
-<!--                        >-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                        <label class="col-form-label">-->
-<!--                            kg-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <h5 class="card-text">30.000đ</h5>-->
-<!--                <hr />-->
-<!--                <div class="col-auto d-flex flex-column">-->
-<!--                    <button type="button" class="btn btn-outline-danger">-->
-<!--                        <i class="bi bi-trash3-fill"></i>-->
-<!--                        Xóa-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--    </div>-->
-<!--</div>-->
 
 <!-- Footer-->
 <footer class="py-5 bg-dark">
@@ -168,19 +151,6 @@
             textQuantityEle.innerHTML = number.toString();
         })
     }
-
-    // const cartButtonEle = document.querySelector('#cart-button');
-    // const sideBarCartEle = document.querySelector('#sidebar-cart');
-    // const closeSideBarCartButton = document.querySelector('#close-sidebar-cart-button');
-    // // Open sidebar cart
-    // cartButtonEle.addEventListener('click', (e) => {
-    //     sideBarCartEle.classList.toggle('open-cart');
-    // });
-    //
-    // // Click close button on sidebar cart
-    // closeSideBarCartButton.addEventListener('click', (e) => {
-    //     sideBarCartEle.classList.toggle('open-cart');
-    // });
 </script>
 
 </body>

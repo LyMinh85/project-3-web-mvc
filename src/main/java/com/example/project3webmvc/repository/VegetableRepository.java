@@ -6,4 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface VegetableRepository extends JpaRepository<Vegetable, Integer> { }
+public interface VegetableRepository extends JpaRepository<Vegetable, Integer> {
+    List<Vegetable> findVegetableByVegetableNameLikeAndCategory_CategoryID(String name, Integer categoryId);
+    List<Vegetable> findVegetableByVegetableNameLike(String name);
+    List<Vegetable> findVegetableByCategory_CategoryID(Integer categoryId);
+}

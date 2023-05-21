@@ -61,10 +61,10 @@
         </a>
 
         <!-- Khi chưa đăng nhập hiện phần này -->
-        <a class="btn btn-outline-primary mx-1" href="/login"> Login </a>
-        <a class="btn btn-primary mx-1" href="/signup"> Sign up </a>
+        <a th:if="${customer == null}" class="btn btn-outline-primary mx-1" href="/login"> Login </a>
+        <a th:if="${customer == null}" class="btn btn-primary mx-1" href="/signup"> Sign up </a>
         <!-- Khi đã đăng nhập hiện phần này -->
-        <!-- <button class="btn nav-item dropdown">
+        <button th:if="${customer != null}" class="btn nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             id="navbarDropdown"
@@ -74,13 +74,13 @@
             aria-expanded="false"
           >
             <i class="bi bi-person-circle me-1"></i>
-            Quốc Nam
+            <span th:utext="${customer.getFullname()}">Quốc Nam</span>
           </a>
 
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#!">Logout</a></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
-        </button> -->
+        </button>
       </div>
     </div>
   </div>
